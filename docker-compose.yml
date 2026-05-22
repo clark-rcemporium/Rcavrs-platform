@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:13-alpine
+    container_name: avrs-db
+    environment:
+      POSTGRES_USER: avrs
+      POSTGRES_PASSWORD: avrs-secure-password-2026
+      POSTGRES_DB: avrs
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./src/db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U avrs"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - avrs-network
+
+  # AVRS Backend
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: avrs-backend
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://avrs:avrs-secure-password-2026@postgres:5432/avrs
+      DATABASE_POOL_MAX: 20
+      CORS_ORIGIN: http://localhost:3000
+      JWT_SECRET: avrs-jwt-secret-key-2026
+      LOG_LEVEL: info
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - avrs-network
+    restart: unless-stopped
+
+  # Redis Cache (Optional)
+  redis:
+    image: redis:7-alpine
+    container_name: avrs-cache
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - avrs-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  avrs-network:
+    driver: bridge
