@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AVRS - Autonomous Venture Replication System. Build a $6.5B+ portfolio of 15 ventures in 470 days.">
+  <meta name="theme-color" content="#1a1a2e">
+  <title>AVRS - Autonomous Venture Replication System</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #0f0f1e;
+      --secondary: #1a1a2e;
+      --tertiary: #16213e;
+      --accent: #ffd700;
+      --accent-light: #ffed4e;
+      --success: #00d084;
+      --warning: #ff6b6b;
+      --text: #e0e0e0;
+      --text-muted: #a0a0a0;
+      --border: #2a2a3e;
+      --gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: var(--primary);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header & Navigation */
+    header {
+      background: var(--gradient);
+      border-bottom: 2px solid var(--accent);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo::before {
+      content: "🚀";
+      font-size: 28px;
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .btn {
+      background: var(--accent);
+      color: var(--primary);
+      border: none;
+      padding: 10px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+
+    .btn-secondary:hover {
+      background: var(--accent);
+      color: var(--primary);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 100px 20px;
+      text-align: center;
+      background: var(--gradient);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 56px;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--accent) 0%, #ffed4e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 800;
+    }
+
+    .tagline {
+      font-size: 24px;
+      color: var(--text);
+      margin-bottom: 30px;
+      font-weight: 300;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+
+    /* Metrics Section */
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 60px 20px;
+      background: var(--secondary);
+    }
+
+    .metric-card {
+      background: var(--tertiary);
+      padding: 30px;
+      border-radius: 12px;
+      border-left: 4px solid var(--accent);
+      transition: all 0.3s ease;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+    }
+
+    .metric-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .metric-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 80px 20px;
+      background: var(--primary);
+    }
+
+    .section-title {
+      font-size: 40px;
+      text-align: center;
+      margin-bottom: 60px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: var(--secondary);
+      padding: 40px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 10px 40px rgba(255, 215, 0, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .feature-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--accent);
+    }
+
+    .feature-desc {
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* Dashboard Preview */
+    .dashboard-section {
+      padding: 80px 20px;
+      background: var(--secondary);
+    }
+
+    .dashboard-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .dashboard-text h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+
+    .dashboard-text p {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+
+    .dashboard-preview {
+      background: var(--tertiary);
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+    }
+
+    /* API Documentation */
+    .api-section {
+      padding: 80px 20px;
+      background: var(--primary);
+    }
+
+    .endpoints-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .endpoint-card {
+      background: var(--secondary);
+      padding: 25px;
+      border-radius: 8px;
+      border-left: 4px solid var(--success);
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 13px;
+    }
+
+    .endpoint-method {
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .endpoint-path {
+      color: var(--text);
+      word-break: break-all;
+      margin-bottom: 8px;
+    }
+
+    .endpoint-desc {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 80px 20px;
+      background: var(--gradient);
+      text-align: center;
+      border-top: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .cta-section h2 {
+      font-size: 40px;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+
+    .cta-section p {
+      font-size: 18px;
+      color: var(--text);
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--secondary);
+      border-top: 1px solid var(--border);
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 36px;
+      }
+
+      .tagline {
+        font-size: 18px;
+      }
+
+      nav {
+        gap: 15px;
+        font-size: 14px;
+      }
+
+      .dashboard-content {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .hero-buttons .btn {
+        width: 100%;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      .dashboard-text h2 {
+        font-size: 24px;
+      }
+    }
+
+    /* Loading & Status */
+    .status-badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    .status-live {
+      background: rgba(0, 208, 132, 0.2);
+      color: var(--success);
+    }
+
+    .status-ready {
+      background: rgba(255, 215, 0, 0.2);
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="/" class="logo">AVRS</a>
+        <nav>
+          <a href="#features">Features</a>
+          <a href="#dashboard">Dashboard</a>
+          <a href="#api">API</a>
+          <a href="#contact" class="btn">Get Started</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Build a $6.5B+ Portfolio</h1>
+        <p class="tagline">Manage 15 ventures in parallel with autonomous operations</p>
+        <div class="hero-buttons">
+          <a href="/dashboard.html" class="btn">View Dashboard</a>
+          <a href="#api" class="btn btn-secondary">API Documentation</a>
+        </div>
+        <div class="status-badge status-live">✓ System Live & Ready</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics Section -->
+  <section class="metrics">
+    <div class="metric-card">
+      <div class="metric-value">15</div>
+      <div class="metric-label">Ventures in Portfolio</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">7</div>
+      <div class="metric-label">Execution Phases</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">$6.5B+</div>
+      <div class="metric-label">Target Enterprise Value</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">470</div>
+      <div class="metric-label">Days to Scale</div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="container">
+      <h2 class="section-title">Core Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <div class="feature-title">Portfolio Management</div>
+          <div class="feature-desc">Launch and manage 15 ventures simultaneously with real-time tracking and metrics.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <div class="feature-title">Venture Replication</div>
+          <div class="feature-desc">Clone proven playbooks and launch parallel ventures with one click.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚙️</div>
+          <div class="feature-title">Autonomous Operations</div>
+          <div class="feature-desc">24/7 automated lead generation, sales, and customer success operations.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <div class="feature-title">Real-Time Analytics</div>
+          <div class="feature-desc">Track unit economics, growth metrics, and portfolio KPIs in real-time.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <div class="feature-title">7-Phase Framework</div>
+          <div class="feature-desc">Follow proven execution roadmap from preparation to $6.5B portfolio.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔌</div>
+          <div class="feature-title">API-First Architecture</div>
+          <div class="feature-desc">30+ REST endpoints for complete programmatic control and integration.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard Section -->
+  <section class="dashboard-section" id="dashboard">
+    <div class="container">
+      <div class="dashboard-content">
+        <div class="dashboard-text">
+          <h2>Real-Time Dashboard</h2>
+          <p>Monitor your entire 15-venture portfolio from a single, intuitive dashboard. Track execution phases, autonomous operations, and real-time metrics.</p>
+          <p>View KPI metrics, venture status, phase progress, and analytics all in one place.</p>
+          <a href="/dashboard.html" class="btn">Open Dashboard</a>
+        </div>
+        <div class="dashboard-preview">
+          📊 Dashboard Preview
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- API Section -->
+  <section class="api-section" id="api">
+    <div class="container">
+      <h2 class="section-title">API Endpoints</h2>
+      <div class="endpoints-grid">
+        <div class="endpoint-card">
+          <div class="endpoint-method">GET</div>
+          <div class="endpoint-path">/api/ventures</div>
+          <div class="endpoint-desc">List all ventures</div>
+        </div>
+        <div class="endpoint-card">
+          <div class="endpoint-method">POST</div>
+          <div class="endpoint-path">/api/ventures</div>
+          <div class="endpoint-desc">Create new venture</div>
+        </div>
+        <div class="endpoint-card">
+          <div class="endpoint-method">GET</div>
+          <div class="endpoint-path">/api/analytics/portfolio</div>
+          <div class="endpoint-desc">Portfolio metrics</div>
+        </div>
+        <div class="endpoint-card">
+          <div class="endpoint-method">POST</div>
+          <div class="endpoint-path">/api/replicate/launch-wave</div>
+          <div class="endpoint-desc">Launch parallel ventures</div>
+        </div>
+        <div class="endpoint-card">
+          <div class="endpoint-method">GET</div>
+          <div class="endpoint-path">/api/framework/summary</div>
+          <div class="endpoint-desc">Execution summary</div>
+        </div>
+        <div class="endpoint-card">
+          <div class="endpoint-method">POST</div>
+          <div class="endpoint-path">/api/operations/execute-cycle</div>
+          <div class="endpoint-desc">Execute operations</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <h2>Ready to Build Your Portfolio?</h2>
+      <p>Start managing your 15-venture portfolio today with AVRS autonomous operations and real-time analytics.</p>
+      <div class="hero-buttons">
+        <a href="/dashboard.html" class="btn">View Dashboard</a>
+        <a href="/health" class="btn btn-secondary">API Health Check</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/dashboard.html">Dashboard</a>
+        <a href="/health">Health</a>
+        <a href="/">API</a>
+      </div>
+      <p>&copy; 2024 AVRS - Autonomous Venture Replication System. All rights reserved.</p>
+      <p style="margin-top: 10px; font-size: 12px;">Built with Node.js + Express + PostgreSQL</p>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Check API health
+    async function checkHealth() {
+      try {
+        const response = await fetch('/health');
+        if (response.ok) {
+          console.log('✓ AVRS API is healthy');
+        }
+      } catch (error) {
+        console.error('API health check failed:', error);
+      }
+    }
+
+    checkHealth();
+  </script>
+</body>
+</html>

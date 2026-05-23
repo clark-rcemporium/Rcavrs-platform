@@ -60,6 +60,13 @@ app.use((req: Request, res: Response, next) => {
 });
 
 // ============================================================================
+// STATIC FILES
+// ============================================================================
+
+// Serve static files from public directory
+app.use(express.static('public'));
+
+// ============================================================================
 // ROUTES
 // ============================================================================
 
@@ -77,8 +84,13 @@ app.get('/health', (req: Request, res: Response) => {
   });
 });
 
-// Root endpoint
+// Root endpoint - serve index.html
 app.get('/', (req: Request, res: Response) => {
+  res.sendFile('public/index.html', { root: __dirname + '/..' });
+});
+
+// API info endpoint
+app.get('/api/info', (req: Request, res: Response) => {
   res.json({
     name: 'AVRS - Autonomous Venture Replication System',
     version: '1.0.0',
