@@ -1,47 +1,17 @@
 {
-  "name": "AVRS - Autonomous Venture Replication System",
-  "description": "Production-ready platform for managing 15-venture portfolio with autonomous operations",
-  "buildCommand": "npm install && npm run build",
-  "startCommand": "npm start",
-  "environmentVariables": {
-    "NODE_ENV": "production",
-    "PORT": "3000",
-    "DATABASE_URL": "${{ DATABASE_URL }}",
-    "DATABASE_POOL_MAX": "20",
-    "CORS_ORIGIN": "https://yourdomain.com",
-    "JWT_SECRET": "${{ JWT_SECRET }}",
-    "LOG_LEVEL": "info"
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "nixpacks"
   },
-  "services": [
-    {
-      "name": "avrs-backend",
-      "type": "nodejs",
-      "root": ".",
-      "buildCommand": "npm install && npm run build",
-      "startCommand": "npm start",
-      "port": 3000
-    },
-    {
-      "name": "avrs-database",
-      "type": "postgresql",
-      "version": "13"
-    }
-  ],
-  "volumes": [
-    {
-      "name": "logs",
-      "path": "/app/logs"
-    }
-  ],
-  "healthCheck": {
-    "path": "/health",
-    "interval": 30,
-    "timeout": 10
+  "deploy": {
+    "numReplicas": 1,
+    "startCommand": "npm start",
+    "restartPolicyType": "on_failure",
+    "restartPolicyMaxRetries": 10
   },
-  "scaling": {
-    "minInstances": 1,
-    "maxInstances": 4,
-    "cpuThreshold": 70,
-    "memoryThreshold": 80
-  }
+  "plugins": [
+    {
+      "source": "https://github.com/railwayapp/plugins/tree/main/postgres"
+    }
+  ]
 }
