@@ -13,7 +13,7 @@ RUN npm ci
 COPY . .
 
 # Build TypeScript
-RUN npm run build 2>/dev/null || true
+RUN npm run build
 
 # Production stage
 FROM node:18-alpine
